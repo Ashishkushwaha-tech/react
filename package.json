@@ -2,8 +2,10 @@
   "name": "react",
   "version": "1.0.0",
   "description": "This is first tutorial",
-  "main": "index.js",
+  
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
@@ -24,5 +26,9 @@
   },
   "devDependencies": {
     "process": "^0.11.10"
-  }
+  },
+  "browserList": [
+    "last 2 versions",
+    "last 2 safari version"
+  ]
 }
