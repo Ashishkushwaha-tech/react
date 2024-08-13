@@ -2,8 +2,9 @@ import { useState } from "react";
 import { LOGO_URL } from "../utils/constant";
 
 const Header= () => {
-    let s=1;
+    var s=1;
     const[btnName,setBtnName]=useState("Login");
+    console.log(s);
  return <div className="header">
         <div className="logo-container">
             <img alt="logo" className="logo"

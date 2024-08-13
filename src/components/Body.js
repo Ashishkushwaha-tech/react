@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 
 const Body= () => {
     let [restaurantList,setRestaurantList]=useState([]);
+    const[searchText,setSearchText]=useState("");
+    let [filteredRestaurant,setFilteredRestaurant]=useState([]);
+
+    console.log("body");
     useEffect(() =>{
         fetchData();
     },[]);
@@ -17,6 +21,7 @@ const Body= () => {
         ,json?.data?.cards[9]];
         console.log(arr);
         setRestaurantList(arr);
+        setFilteredRestaurant(arr);
     } ;
     if (restaurantList.length ===0) {
         return <Shimmer/>
@@ -24,15 +29,28 @@ const Body= () => {
     return (
         <div className="body">
             <div className="filter">
+                <div className="search">
+                <input type="text" value={searchText} 
+                onChange={(e)=>{
+                    setSearchText(e.target.value);
+                }}></input>
+                <button onClick={()=>{
+                     let filteredList=restaurantList.filter(
+                        (res) => 
+                            res.card.card.info.name.toLowerCase().includes(searchText.toLowerCase()));
+                        setFilteredRestaurant(filteredList)
+                    console.log("search");
+                }}>search</button>
+                </div>
                 <button className="filter-btn" onClick={()=>{
                    let filteredList=resList.filter(
                         (res) => res.card.card.info.avgRating >= 4.4);
-                        setRestaurantList(filteredList)
+                        setFilteredRestaurant(filteredList)
                 }}>Top Rated Restaurants</button>
             </div>
             <div className="res-container">
                {
-                restaurantList.map((restaurant) => (
+                filteredRestaurant.map((restaurant) => (
                   <RestaurantCard key={restaurant.card.card.info.id} resData={restaurant}/>
                 ))
                }
